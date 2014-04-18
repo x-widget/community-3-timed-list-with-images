@@ -40,9 +40,9 @@ $list = g::posts( array(
     <?php for ($i=0; $i<count($list); $i++) {?>
 	<tr valign='top'>
 		
-            <?php			
-			$imgsrc = get_list_thumbnail( $bo_table , $list[$i]['wr_id'], 38, 30 );
-			
+		<?php			
+		
+			$imgsrc = x::post_thumbnail($bo_table, $li['wr_id'], 38, 30);		
 			if( $date_and_time[0] == date("Y-m-d") ) $post_date = $date_and_time[1];
 			else $post_date = $date_and_time[0];
 			
