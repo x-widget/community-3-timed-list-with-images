@@ -18,6 +18,8 @@ else $title = 'no title';
 if( $widget_config['forum1'] ) $_bo_table = $widget_config['forum1'];
 else $_bo_table = $widget_config['default_forum_id'];
 
+if ( empty($_bo_table) ) jsAlert('Error: empty $_bo_table ? on widget :' . $widget_config['name']);
+
 $limit = 4;
 
 $list = g::posts( array(
