@@ -16,7 +16,7 @@ if( $widget_config['title'] ) $title = $widget_config['title'];
 else $title = 'no title';
 
 if( $widget_config['forum1'] ) $_bo_table = $widget_config['forum1'];
-else $_bo_table = $widget_config['default_forum_id'];;
+else $_bo_table = $widget_config['default_forum_id'];
 
 $limit = 4;
 
@@ -49,7 +49,7 @@ $list = g::posts( array(
 			if( $imgsrc ) $img = $imgsrc['src'];
 			else {
 				$_wr_content = db::result("SELECT wr_content FROM $g5[write_prefix]$_bo_table WHERE wr_id='$_wr_id'");
-				$img = x::thumbnail_from_image_tag("$_wr_content", $_bo_table, 38, 30);
+				$img = x::thumbnail_from_image_tag($_wr_content, $_bo_table, 38, 30);
 				if ( empty($img) ) $img = x::url()."/widget/".$widget_config['name'].'/img/no-image.png';
 			}
 			
