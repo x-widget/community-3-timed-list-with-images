@@ -15,13 +15,13 @@ if($file_headers[0] == 'HTTP/1.1 404 Not Found') {
 if( $widget_config['title'] ) $title = $widget_config['title'];
 else $title = 'no title';
 
-if( $widget_config['forum1'] ) $bo_table = $widget_config['forum1'];
-else $bo_table = bo_table(1);
+if( $widget_config['forum1'] ) $_bo_table = $widget_config['forum1'];
+else $_bo_table = bo_table(1);
 
 $limit = 4;
 
 $list = g::posts( array(
-			"bo_table" 	=>	$bo_table,
+			"bo_table" 	=>	$_bo_table,
 			"limit"		=>	$limit,
 			"select"	=>	"idx,domain,bo_table,wr_id,wr_parent,wr_is_comment,wr_comment,ca_name,wr_datetime,wr_hit,wr_good,wr_nogood,wr_name,mb_id,wr_subject,wr_content"
 				)
@@ -31,9 +31,9 @@ $list = g::posts( array(
 <div class="comm3_timed_list_with_image">
     <div class="timed_list_title">
 		<?if( $icon_url ) echo "<img class='icon' src='".$icon_url."'/>";?>
-		<a href='<?=G5_BBS_URL?>/board.php?bo_table=<?=$bo_table?>'><?=$title?></a>
+		<a href='<?=G5_BBS_URL?>/board.php?bo_table=<?=$_bo_table?>'><?=$title?></a>
 		
-		<span class='more-button'><a href='<?=G5_BBS_URL?>/board.php?bo_table=<?=$bo_table?>'>자세히</a></span>
+		<span class='more-button'><a href='<?=G5_BBS_URL?>/board.php?bo_table=<?=$_bo_table?>'>자세히</a></span>
 		<div style='clear:right;'></div>
 	</div>
     <table width='100%' cellpadding=0 cellspacing=0>
@@ -42,7 +42,7 @@ $list = g::posts( array(
 		
 		<?php			
 		
-			$imgsrc = x::post_thumbnail($bo_table, $li['wr_id'], 38, 30);		
+			$imgsrc = x::post_thumbnail($_bo_table, $li['wr_id'], 38, 30);		
 			if( $date_and_time[0] == date("Y-m-d") ) $post_date = $date_and_time[1];
 			else $post_date = $date_and_time[0];
 			
