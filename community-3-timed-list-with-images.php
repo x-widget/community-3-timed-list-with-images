@@ -18,7 +18,15 @@ else $title = 'no title';
 if( $widget_config['forum1'] ) $_bo_table = $widget_config['forum1'];
 else $_bo_table = $widget_config['default_forum_id'];
 
-if ( empty($_bo_table) ) jsAlert('Error: empty $_bo_table ? on widget :' . $widget_config['name']);
+$forum_exists = false;
+if ( empty($_bo_table) ) {
+	// jsAlert('Error: empty $_bo_table ? on widget :' . $widget_config['name'] .  "Please select a forum");
+}
+else { /* if forum exists */
+	$forum_exists = true;
+}
+
+
 
 $limit = 4;
 
@@ -38,6 +46,7 @@ $list = g::posts( array(
 		<span class='more-button'><a href='<?=G5_BBS_URL?>/board.php?bo_table=<?=$_bo_table?>'>자세히</a></span>
 		<div style='clear:right;'></div>
 	</div>
+	<? if ( $forum_exists ) { ?>
     <table width='100%' cellpadding=0 cellspacing=0>
     <?php for ($i=0; $i<count($list); $i++) {?>
 	<tr valign='top'>
@@ -54,7 +63,6 @@ $list = g::posts( array(
 				$img = x::thumbnail_from_image_tag($_wr_content, $_bo_table, 38, 30);
 				if ( empty($img) ) $img = x::url()."/widget/".$widget_config['name'].'/img/no-image.png';
 			}
-			
 			echo "<td width='40'><div class='timed_list_image'><a href='".$list[$i]['url']."'><img src='$img'/></a></div></td>";
 			        
             echo "<td>
@@ -104,8 +112,18 @@ $list = g::posts( array(
 			<td><div class='comment_and_time'>10<br><span class='time'><?=date('H:i', time())?></span></div></td>
 		</tr>
     <?php }  ?>
-    </table>    
+    </table>
+	<? } /* eo if forum exists */
+		else {
+	?>
+		<div style='padding: 1.4em; font-style: italic;'>
+			Forum does not selected. Choose a forum first
+		</div>
+	<? } /* eo if forum does not exist */ ?>
 </div>
+
+
+
 
 
 
